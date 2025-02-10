@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Conversion</title>
+	<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px; /* Add margin between containers */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="file"],
+        select {
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .download-link {
+            text-align: center;
+            margin-top: 20px; /* Add margin above the download link */
+        }
+
+        .download-link a {
+            display: block;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .download-link a:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <!-- Styles remain unchanged -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('form').on('submit', function(event){
+          event.preventDefault();
+          
+          var formData = new FormData(this);
+          
+          $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+              if(data.download_url){
+                var downloadLink = '<a href="' + data.download_url + '">Download ' + data.filename + '</a>';
+                $('.download-link').html(downloadLink);
+              }
+            },
+            error: function(xhr, status, error){
+              alert('Error uploading file: ' + xhr.responseText);
+            }
+          });
+        });
+      });
+    </script>
+</head>
+<body>
+    <!-- Body content remains unchanged -->
+	    <div class="container">
+        <h1>File Conversion</h1>
+        <form method="post" enctype="multipart/form-data">
+            <label for="file">Select a file:</label>
+            <input type="file" id="file" name="file" required>
+            <label for="input_format">Input File Type:</label>
+            <select id="input_format" name="input_format">
+                <option value="pdf">PDF</option>
+                <option value="docx">DOCX</option>
+                <option value="img">Image</option>
+                <option value="other">Other</option>
+            </select>
+            <label for="output_format">Output Format:</label>
+            <select id="output_format" name="output_format">
+                <option value="pdf">PDF</option>
+                <option value="docx">DOCX</option>
+            </select>
+            <input type="submit" value="Convert">
+        </form>
+        <div class="download-link">
+            <a href="{{ url_for('download', filename=filename) }}">Download {{ filename }}</a>
+        </div>
+    </div>
+</body>
+</html>
