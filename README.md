@@ -2,7 +2,7 @@
 
 # 📌 Overview
 
-Format 360 is a scalable, serverless file conversion service developed on Google Cloud Platform (GCP). It is designed to overcome limitations in traditional file conversion tools by offering real-time processing, automation, and enhanced scalability. The project utilizes Cloud Functions, Cloud Run, and Cloud Storage to enable seamless conversion across multiple file formats while ensuring efficiency, security, and compliance with industry standards.
+Format 360 is a scalable, serverless file conversion service developed on Google Cloud Platform (GCP). It is designed to overcome limitations in traditional file conversion tools by offering real-time processing, automation, and enhanced scalability. The project utilizes Cloud Functions, Cloud Run, and Cloud Storage to enable seamless conversion across multiple file-formats while ensuring efficiency, security, and compliance with industry standards.
 
 # 👥 Team Members
 - Vaishnavi Pawar
@@ -32,7 +32,6 @@ Format 360 is a scalable, serverless file conversion service developed on Google
 # ⚠️ Disclaimer
 
 This repository contains academic project work and is for learning purposes only. The implementation is based on research and coursework.
-
 
 🚀 Transforming File Conversion with Cloud Technology!
 
